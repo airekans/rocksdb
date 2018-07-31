@@ -730,6 +730,10 @@ else()
   add_library(${ROCKSDB_SHARED_LIB} SHARED ${SOURCES})
   target_link_libraries(${ROCKSDB_SHARED_LIB}
     ${THIRDPARTY_LIBS} ${SYSTEM_LIBS})
+  find_library(LIBRT rt)
+  if(LIBRT)
+    target_link_libraries(${ROCKSDB_SHARED_LIB} ${LIBRT})
+  endif(LIBRT)
   set_target_properties(${ROCKSDB_SHARED_LIB} PROPERTIES
                         LINKER_LANGUAGE CXX
                         VERSION ${ROCKSDB_VERSION}
